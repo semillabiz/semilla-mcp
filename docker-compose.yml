@@ -1,0 +1,66 @@
+version: '3.8'
+services:
+  odoo1:
+    build: ./odool
+    container_name: mcp_odoo1
+    env_file:
+      - .env
+    environment:
+      - ODOO_URL=${ODOO1_URL}
+      - ODOO_DB=${ODOO1_DB}
+      - ODOO_USERNAME=${ODOO1_USER}
+      - ODOO_PASSWORD=${ODOO1_PASS}
+      - ODOO_MCP_PORT=8091
+    ports:
+      - "8091:8091"
+    networks:
+      - mcp_network
+
+  odoo2:
+    build: ./odool
+    container_name: mcp_odoo2
+    env_file:
+      - .env
+    environment:
+      - ODOO_URL=${ODOO2_URL}
+      - ODOO_DB=${ODOO2_DB}
+      - ODOO_USERNAME=${ODOO2_USER}
+      - ODOO_PASSWORD=${ODOO2_PASS}
+      - ODOO_MCP_PORT=8092
+    ports:
+      - "8092:8092"
+    networks:
+      - mcp_network
+
+  agent:
+    build: ./agent
+    container_name: cs_agent
+    env_file:
+      - .env
+    environment:
+      - ODOO1_URL=http://odoo1:8069
+      - ODOO1_DB=${ODOO1_DB}
+      - ODOO1_USER=${ODOO1_USER}
+      - ODOO1_PASS=${ODOO1_PASS}
+      - ODOO2_URL=http://odoo2:8069
+      - ODOO2_DB=${ODOO2_DB}
+      - ODOO2_USER=${ODOO2_USER}
+      - ODOO2_PASS=${ODOO2_PASS}
+      - EMAIL_FROM=${EMAIL_FROM}
+      - SMTP_HOST=${SMTP_HOST}
+      - SMTP_PORT=${SMTP_PORT}
+      - SMTP_USER=${SMTP_USER}
+      - SMTP_PASS=${SMTP_PASS}
+      - DISCORD_ENABLED=${DISCORD_ENABLED}
+      - DISCORD_WEBHOOK_URL=${DISCORD_WEBHOOK_URL}
+    depends_on:
+      - odoo1
+      - odoo2
+    networks:
+      - mcp_network
+    ports:
+      - "3000:3000"
+
+networks:
+  mcp_network:
+    driver: bridge

@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "cliente1": { "url": "http://odoo1:8091" },
+    "cliente2": { "url": "http://odoo2:8092" }
+  },
+  "autoRun": {
+    "workflow": [
+      {
+        "name": "monitor_usage",
+        "cron": "0 9 * * MON",
+        "prompt": "Chequea logins y uso para {{cliente}} y genera alerta si <5 usuarios activos"
+      }
+    ]
+  }
+}
