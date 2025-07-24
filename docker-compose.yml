@@ -32,6 +32,25 @@ services:
     networks:
       - mcp_network
 
+  ai-service:
+    build: ./ai-service
+    container_name: mcp_ai
+    ports:
+      - "11434:11434"
+    volumes:
+      - ai_models:/root/.ollama
+    networks:
+      - mcp_network
+    environment:
+      - OLLAMA_HOST=0.0.0.0
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]  # Si tienes GPU
+
   agent:
     build: ./agent
     container_name: cs_agent
@@ -56,10 +75,14 @@ services:
     depends_on:
       - odoo1
       - odoo2
+      - ai-service  # 🆕 Nueva dependencia
     networks:
       - mcp_network
     ports:
       - "3000:3000"
+
+volumes:
+  ai_models:
 
 networks:
   mcp_network:
