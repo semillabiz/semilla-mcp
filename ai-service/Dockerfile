@@ -10,4 +10,5 @@ EXPOSE 11434
 COPY init-models.sh /init-models.sh
 RUN chmod +x /init-models.sh
 
-CMD ["/init-models.sh"]
+# Usar entrypoint personalizado
+ENTRYPOINT ["/init-models.sh"]

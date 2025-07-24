@@ -43,13 +43,13 @@ services:
       - mcp_network
     environment:
       - OLLAMA_HOST=0.0.0.0
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: 1
-              capabilities: [gpu]  # Si tienes GPU
+    # deploy:  # ❌ Comentar toda esta sección para macOS
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: 1
+    #           capabilities: [gpu]  # Si tienes GPU
 
   agent:
     build: ./agent
