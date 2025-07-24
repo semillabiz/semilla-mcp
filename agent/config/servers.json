@@ -1,0 +1,45 @@
+{
+  "odooServers": [
+    {
+      "name": "semillaerp-roystore",
+      "url": "https://www.roystore.net",
+      "db": "semillaerp-roystore",
+      "username": "info@roystore.net",
+      "enabled": true,
+      "description": "Servidor principal RoyStore"
+    },
+    {
+      "name": "lacheminee",
+      "url": "https://lacheminee.semilla.biz",
+      "db": "lacheminee",
+      "username": "noreply@noreply.semilla.biz",
+      "enabled": true,
+      "description": "Servidor La Cheminée"
+    },
+    {
+      "name": "marcristal",
+      "url": "https://marcristal.semilla.biz",
+      "db": "marcristal",
+      "username": "noreply@noreply.semilla.biz",
+      "enabled": true,
+      "description": "Servidor Marcristal"
+    },
+    {
+      "name": "solosol",
+      "url": "https://solosol.semilla.biz",
+      "db": "solosol",
+      "username": "noreply@noreply.semilla.biz",
+      "enabled": true,
+      "description": "Servidor Solosol"
+    }
+  ],
+  "emailConfig": {
+    "to": "info@semilla.biz",
+    "from": "mcp-odoo@semilla.biz"
+  },
+  "monitoringSettings": {
+    "intervalHours": 4,
+    "enableDiscord": true,
+    "enableEmail": true
+  }
+}

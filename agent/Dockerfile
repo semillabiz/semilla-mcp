@@ -8,6 +8,7 @@ RUN npm init -y && npm install axios nodemailer xmlrpc
 # Copiar archivos
 COPY config/ ./config/
 COPY index.js .
+COPY customer-success-dashboard.js .
 
 # Comando de inicio
 CMD ["node", "index.js"]
