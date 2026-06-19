@@ -1,0 +1,81 @@
+{
+  "manifest_version": "0.2",
+  "name": "semilla-mcp",
+  "display_name": "Semilla ERP",
+  "version": "1.2.1",
+  "description": "Consultá y operá tu ERP de Semilla (ventas, compras, contabilidad, inventario, POS, verticales y Semilla Connect) en lenguaje natural desde Claude.",
+  "long_description": "Servidor MCP para Semilla ERP. Expone 259 tools agrupadas por módulo: ventas, compras, contabilidad y reportes, inventario y productos, punto de venta, listas de precios, usuarios y empresas, los verticales de Gastronomía, Hotelería, Salud, Agricultura y Logística, integración con Mercado Libre, y las apps de Semilla Connect (consumidor, especialista, comercio y gimnasio). Las operaciones de escritura crítica usan un patrón preview/confirm para mostrar el impacto antes de ejecutarlo. La autenticación se hace por un flujo de login seguro en el navegador (device flow) — el MCP nunca pide email ni contraseña dentro del chat.",
+  "author": {
+    "name": "Semilla",
+    "email": "soporte@semilla.biz",
+    "url": "https://semilla.biz"
+  },
+  "homepage": "https://github.com/semillabiz/semilla-mcp",
+  "documentation": "https://github.com/semillabiz/semilla-mcp#readme",
+  "support": "https://github.com/semillabiz/semilla-mcp/issues",
+  "license": "MIT",
+  "privacy_policies": [
+    "https://semilla.biz/documentacion/semilla-mcp/privacidad"
+  ],
+  "keywords": [
+    "erp",
+    "semilla",
+    "argentina",
+    "afip",
+    "arca",
+    "ventas",
+    "contabilidad",
+    "pos"
+  ],
+  "server": {
+    "type": "node",
+    "entry_point": "dist/index.js",
+    "mcp_config": {
+      "command": "node",
+      "args": ["${__dirname}/dist/index.js"],
+      "env": {
+        "SEMILLA_ERP_URL": "${user_config.semilla_erp_url}",
+        "SEMILLA_JWT_TOKEN": "${user_config.semilla_jwt_token}",
+        "SEMILLA_CONNECT_URL": "${user_config.semilla_connect_url}",
+        "SEMILLA_CONNECT_API_KEY": "${user_config.semilla_connect_api_key}"
+      }
+    }
+  },
+  "user_config": {
+    "semilla_erp_url": {
+      "type": "string",
+      "title": "URL del ERP de Semilla",
+      "description": "URL de tu instancia del ERP (ej: https://erp.tu-empresa.com).",
+      "required": true,
+      "default": "https://semilla-erp-v-production.up.railway.app"
+    },
+    "semilla_jwt_token": {
+      "type": "string",
+      "title": "Token JWT (opcional)",
+      "description": "Token JWT pre-generado para arrancar ya autenticado. Si se deja vacío, se inicia sesión con el flujo de login seguro en el navegador. Tratalo como una contraseña.",
+      "required": false,
+      "sensitive": true
+    },
+    "semilla_connect_url": {
+      "type": "string",
+      "title": "URL de Semilla Connect (opcional)",
+      "description": "URL del backend de Semilla Connect. Solo necesaria si vas a usar las tools de Connect.",
+      "required": false,
+      "default": "https://connect.semilla.biz"
+    },
+    "semilla_connect_api_key": {
+      "type": "string",
+      "title": "API key de Semilla Connect (opcional)",
+      "description": "API key compartida del backend de Semilla Connect. Solo necesaria para usar las tools de Connect. Tratala como una contraseña.",
+      "required": false,
+      "sensitive": true
+    }
+  },
+  "compatibility": {
+    "claude_desktop": ">=0.10.0",
+    "platforms": ["darwin", "win32", "linux"],
+    "runtimes": {
+      "node": ">=18.0.0"
+    }
+  }
+}

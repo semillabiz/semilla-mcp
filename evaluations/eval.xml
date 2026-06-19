@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<evaluations>
+  <!-- Semilla MCP Tool Selection QA Pairs -->
+  <!-- Each pair tests that the model selects the correct tool for a given user request -->
+
+  <eval id="01_auth_secure">
+    <input>Logueame a mi empresa "roystore"</input>
+    <expected_tool>iniciar_login_semilla</expected_tool>
+    <rationale>El usuario quiere conectarse. Debe usarse el flujo seguro (iniciar_login_semilla) que genera un enlace de browser, nunca login_semilla que pide credenciales en el chat.</rationale>
+  </eval>
+
+  <eval id="02_facturas_vs_ventas">
+    <input>Mostrame las últimas facturas del mes</input>
+    <expected_tool>get_facturas</expected_tool>
+    <rationale>El usuario pide facturas (comprobantes fiscales). get_ventas lista órdenes de venta, no facturas. Debe usarse get_facturas.</rationale>
+  </eval>
+
+  <eval id="03_buscar_cliente">
+    <input>Busca el cliente "Martínez"</input>
+    <expected_tool>buscar_clientes</expected_tool>
+    <rationale>El usuario quiere buscar un cliente por nombre. La tool correcta es buscar_clientes.</rationale>
+  </eval>
+
+  <eval id="04_crear_orden_venta_preview">
+    <input>Quiero hacer un pedido de 3 unidades del producto "Silla Ergonómica" para el cliente Juan Pérez</input>
+    <expected_tool>preview_crear_orden_venta</expected_tool>
+    <rationale>El usuario quiere crear una orden de venta. Debe usarse primero el paso preview para mostrar el resumen antes de confirmar.</rationale>
+  </eval>
+
+  <eval id="05_stock_inventario">
+    <input>¿Cuántas unidades de "Laptop Pro" tengo en stock?</input>
+    <expected_tool>buscar_productos</expected_tool>
+    <rationale>El usuario pregunta por el stock de un producto específico. Debe buscarse el producto primero para obtener su ID, o usar get_niveles_stock si ya tiene el ID. buscar_productos es el punto de entrada más apropiado cuando no hay ID.</rationale>
+  </eval>
+
+  <eval id="06_dashboard_gastronomia">
+    <input>¿Cuántas mesas están ocupadas ahora?</input>
+    <expected_tool>gastro_get_mesas</expected_tool>
+    <rationale>El usuario pregunta por el estado actual de las mesas del restaurante. gastro_get_mesas devuelve la lista con estado de cada mesa.</rationale>
+  </eval>
+
+  <eval id="07_postear_factura">
+    <input>Confirmá y enviá a ARCA la factura B0001-00000042</input>
+    <expected_tool>postear_factura</expected_tool>
+    <rationale>El usuario quiere postear (confirmar/emitir) una factura existente. La tool correcta es postear_factura.</rationale>
+  </eval>
+
+  <eval id="08_reserva_hotel">
+    <input>Hacé una reserva para 2 personas del 20 al 25 de junio para Juan García</input>
+    <expected_tool>hosp_preview_crear_reserva</expected_tool>
+    <rationale>El usuario quiere crear una reserva hotelera. Debe usarse el paso preview primero para mostrar el resumen y confirmar disponibilidad antes de crear efectivamente la reserva.</rationale>
+  </eval>
+
+  <eval id="09_turno_medico">
+    <input>¿Qué turnos tiene el Dr. Rodríguez mañana?</input>
+    <expected_tool>salud_get_agenda</expected_tool>
+    <rationale>El usuario quiere ver la agenda de un profesional para una fecha específica. salud_get_agenda es la tool adecuada, filtrable por profesional y fecha.</rationale>
+  </eval>
+
+  <eval id="10_orden_compra_paginacion">
+    <input>Mostrá más órdenes de compra (las siguientes 20)</input>
+    <expected_tool>get_ordenes_compra</expected_tool>
+    <rationale>El usuario quiere ver la siguiente página de órdenes de compra. Debe llamarse get_ordenes_compra con offset incrementado (ej: offset: 20 si ya se vieron las primeras 20).</rationale>
+  </eval>
+
+</evaluations>

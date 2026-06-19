@@ -1,0 +1,34 @@
+{
+  "_comentario": "Agregá esto dentro de 'mcpServers' en tu claude_desktop_config.json",
+  "_ruta_config_mac": "~/Library/Application Support/Claude/claude_desktop_config.json",
+  "_ruta_config_win": "%APPDATA%/Claude/claude_desktop_config.json",
+
+  "mcpServers": {
+    "semilla-erp": {
+      "command": "node",
+      "args": [
+        "/Users/lautarodeangelis/Documents/semilla-2.0/semilla-erp-v/semilla-mcp/dist/index.js"
+      ],
+      "env": {
+        "SEMILLA_ERP_URL": "https://semilla-erp-v-production.up.railway.app",
+        "SEMILLA_JWT_TOKEN": "TU_JWT_TOKEN_AQUI"
+      }
+    }
+  },
+
+  "_alternativa_dev": {
+    "mcpServers": {
+      "semilla-erp": {
+        "command": "npx",
+        "args": [
+          "tsx",
+          "/Users/lautarodeangelis/Documents/semilla-2.0/semilla-erp-v/semilla-mcp/src/index.ts"
+        ],
+        "env": {
+          "SEMILLA_ERP_URL": "https://semilla-erp-v-production.up.railway.app",
+          "SEMILLA_JWT_TOKEN": "TU_JWT_TOKEN_AQUI"
+        }
+      }
+    }
+  }
+}
