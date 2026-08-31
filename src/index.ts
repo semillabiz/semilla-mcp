@@ -162,6 +162,16 @@ import {
   handleLogisConfirmarCrearAsignacion,
 } from './tools/logistics.js';
 import {
+  automationsTools,
+  handleAutomationsCatalogoNodos,
+  handleAutomationsListar,
+  handleAutomationsProbarRegla,
+  handleAutomationsPreviewCrearRegla,
+  handleAutomationsConfirmarCrearRegla,
+  handleAutomationsPreviewActivarDesactivar,
+  handleAutomationsConfirmarActivarDesactivar,
+} from './tools/automations.js';
+import {
   mercadoLibreTools,
   handleMlGetEstado,
   handleMlListarPublicaciones,
@@ -398,6 +408,7 @@ function buildToolGroups(): ToolGroup[] {
     { module: 'health', tools: healthTools },
     { module: 'agriculture', tools: agricultureTools },
     { module: 'epis', tools: logisticsTools },
+    { module: 'automations', tools: automationsTools },
     { module: 'mercado_libre', tools: mercadoLibreTools },
     { module: 'hr', tools: hrAttendanceTools },
     { module: 'accountants', tools: accountantTools },
@@ -704,6 +715,13 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
       case 'logis_listar_asignaciones':       return await handleLogisListarAsignaciones(safeArgs);
       case 'logis_preview_crear_asignacion':  return await handleLogisPreviewCrearAsignacion(safeArgs);
       case 'logis_confirmar_crear_asignacion': return await handleLogisConfirmarCrearAsignacion(safeArgs);
+      case 'automations_catalogo_nodos':                 return await handleAutomationsCatalogoNodos(safeArgs);
+      case 'automations_listar':                         return await handleAutomationsListar(safeArgs);
+      case 'automations_probar_regla':                   return await handleAutomationsProbarRegla(safeArgs);
+      case 'automations_preview_crear_regla':             return await handleAutomationsPreviewCrearRegla(safeArgs);
+      case 'automations_confirmar_crear_regla':           return await handleAutomationsConfirmarCrearRegla(safeArgs);
+      case 'automations_preview_activar_desactivar':      return await handleAutomationsPreviewActivarDesactivar(safeArgs);
+      case 'automations_confirmar_activar_desactivar':    return await handleAutomationsConfirmarActivarDesactivar(safeArgs);
 
       // Usuarios
       case 'listar_usuarios':      return await handleListarUsuarios(safeArgs);
